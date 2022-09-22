@@ -1,30 +1,23 @@
 class Solution {
-    public int findDuplicate(int[] a) {
-        int ans=-1;
-        for(int i = 0; i < a.length; i++) {
-            
-            
-            while(a[i] != i+1 && a[i] != a[a[i] -1]) {
-                
-                swap(a, i , a[i]-1);
-            }
+    public int findDuplicate(int[] nums) {
+        
+        // Find the intersection point of the two runners.
+        int tortoise = nums[0];
+        int hare = nums[0];
+        
+        do {
+            tortoise = nums[tortoise];
+            hare = nums[nums[hare]];
+        } while (tortoise != hare);
+
+        // Find the "entrance" to the cycle.
+        tortoise = nums[0];
+        
+        while (tortoise != hare) {
+            tortoise = nums[tortoise];
+            hare = nums[hare];
         }
-        
-        for(int i = 0; i < a.length; i++) {
-            
-            if(a[i] != i+1) ans=a[i];
-        }
-        
-        
-        return ans;
-        
+
+        return hare;
     }
-    
-    private void swap(int[] a, int i, int j) {
-        
-        int temp = a[i];
-        a[i] = a[j];
-        a[j] = temp;
-    } 
-    
 }

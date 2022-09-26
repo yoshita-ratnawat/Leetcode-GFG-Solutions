@@ -18,12 +18,15 @@ class MyLinkedList {
     
     
     public int get(int index) {
-       if(index >= length) return -1;
-       Node node = head;
-        for(int i=0; i<index; i++){
-            node = node.next;
+      if(index >= length)
+        	return -1;
+        int counter = 0;
+        Node temp = head;
+        while(counter < index) {
+        	counter++;
+        	temp = temp.next;
         }
-        return node.val;
+        return temp.val;
     }
     
     public void addAtHead(int val) {

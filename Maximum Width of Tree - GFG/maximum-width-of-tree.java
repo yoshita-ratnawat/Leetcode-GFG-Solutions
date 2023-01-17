@@ -129,11 +129,9 @@ class Solution {
         q.add(root);
         int max = Integer.MIN_VALUE;
         while(!q.isEmpty()){
-            int ans = 0;
             int count = q.size();
             for (int i = 0; i < count; i++){
                 Node curr = q.poll();
-                ans++;
                 if(curr.left != null){
                     q.add(curr.left);
                 }

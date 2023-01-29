@@ -39,10 +39,10 @@ class Solution
         for(int i = arr.length - 1; i >= 0; i--){
             if(stack.isEmpty()){
                 ans[i] = -1;
-                stack.push(arr[i]);
+                //stack.push(arr[i]);
             }else if(stack.size() > 0 && stack.peek() > arr[i]){
                 ans[i] = stack.peek();
-                stack.push(arr[i]);
+                //stack.push(arr[i]);
             }else{
                 while(!stack.isEmpty() && stack.peek() <= arr[i]){
                     stack.pop();
@@ -52,8 +52,9 @@ class Solution
                 }else{
                     ans[ i] = stack.peek();
                 }
-                stack.push(arr[i]);
+                
             }
+            stack.push(arr[i]);
         }
         return ans;
     } 

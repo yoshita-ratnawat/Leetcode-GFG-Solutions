@@ -63,35 +63,35 @@ class Solution
     //Function to return list containing vertices in Topological order. 
     static int[] topoSort(int V, ArrayList<ArrayList<Integer>> adj) 
     {
-        //Topological Sort: Linear ordering of vertices such that if there is an edge between u & v,
-        //u appears before v in that ordering
-        int[] visited = new int[V];
-        Stack<Integer> s = new Stack<>();
+        // Kahn's Algorithm for topological sort
+        int[] indegree = new int[V];
         
         for(int i = 0; i < V; i++){
-            if(visited[i] == 0){
-                dfs(i,adj,s,visited);
+            for(int it: adj.get(i)){
+                indegree[it]++;
             }
         }
         
-        int[] ans = new int[V];
+        Queue<Integer> q = new LinkedList<>();
+        for(int i = 0; i < V; i++){
+            if(indegree[i] == 0) q.add(i);
+        }
+        
+        int topo[] = new int[V];
         int i = 0;
-        while(!s.isEmpty()){
-            ans[i++] = s.pop();
-        }
         
-        return ans;
-    }
-    
-    static void dfs(int node, ArrayList<ArrayList<Integer>> adj,Stack<Integer> s,int[] visited ){
-        visited[node] = 1;
-        
-        for(int it : adj.get(node)){
-            if(visited[it] == 0){
-                dfs(it,adj,s,visited);
+        while(!q.isEmpty()){
+            int node = q.remove();
+            topo[i++] = node;
+            
+            for(int it: adj.get(node)){
+                indegree[it]--;
+                if(indegree[it] == 0){
+                    q.add(it);
+                }
             }
         }
         
-        s.push(node);
+        return topo;
     }
 }
